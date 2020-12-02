@@ -1,12 +1,22 @@
+import getUniqueId from '../utils/getUniqueId';
+import truncate from '../utils/truncate';
+
 class Expense {
     private label: string;
     private amount: number;
     private date: Date;
+    private id: string;
 
     constructor(label: string, amount: number, date: Date | string) {
         this.updateLabel(label);
         this.updateAmount(amount);
         this.updateDate(date);
+        this.id = getUniqueId();
+    }
+
+    getId(): string {
+        // step 2: create method to return property
+        return this.id;
     }
 
     getLabel(): string {
@@ -14,7 +24,7 @@ class Expense {
     }
 
     updateLabel(label: string): void {
-        this.label = label;
+        this.label = truncate(label, 10);
     }
 
     getAmount(): number {
@@ -33,3 +43,5 @@ class Expense {
         this.date = new Date(date);
     }
 }
+
+export default Expense;
